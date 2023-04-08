@@ -30,6 +30,7 @@ namespace test
             public string companyname { get; set; }
             public string buyer1 { get; set; }
             public string buyer2 { get; set;}
+            //;;;;;;;;;;
         }
     }
 }
