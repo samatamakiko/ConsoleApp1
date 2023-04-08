@@ -1,30 +1,36 @@
-﻿// See https://aka.ms/new-console-template for more information
-
-using Microsoft.VisualBasic.FileIO;
-using System;
+﻿using System;
+using System.Globalization;
 using System.IO;
 using System.Text;
+using CsvHelper;
 
-class Program
+namespace test
 {
-    public static void Main()
+    class Program
     {
-        //ファイル名書く
-        string file = (@"C:\Users\makik\Downloads\test.csv");
-        // Encoding.GetEncodingがShift-JISサポートされていないため、下記の文を書く
-        System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
-        //CSVファイルをメモ帳に出力して文字コードを確認する
-        StreamReader reader = new StreamReader(file, Encoding.GetEncoding("Shift-JIS"));
-        
-       
-            string[] cols = reader.ReadToEnd().Split(",");
-            for (int n = 0; n < cols.Length; n++)
-            {
-                Console.Write(cols[n] + ",");
+        static void Main(string[] args)
+        {
+            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+            using (var reader = new StreamReader(@"C:\Users\makik\Downloads\test.csv",Encoding.GetEncoding("Shift-JIS")))
+            { 
+                using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
+                {
+                    var records = csv.GetRecords<Data>();
+
+                    // records は IEnumerable なので、こんな使い方ができます。
+                    foreach (var i in records)
+                    {
+                        Console.Write(i);
+                    }
+                }
             }
-           // Console.ReadLine();
-      
-        reader.Close();
+        }
+        public class Data
+        {
+            public string companyname { get; set; }
+            public string buyer1 { get; set; }
+            public string buyer2 { get; set;}
+        }
     }
 }
 
