@@ -16,21 +16,22 @@ namespace test
                 using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
                 {
                     var records = csv.GetRecords<Data>();
-
-                    // records は IEnumerable なので、こんな使い方ができます。
+                    
                     foreach (var i in records)
                     {
-                        Console.Write(i);
+                       Console.WriteLine($"{i.受注コード},{i.購入者名1},{i.購入者名2}");
+                       //Console.WriteLine($"{i.ColumnName}");
                     }
                 }
             }
         }
         public class Data
         {
-            public string companyname { get; set; }
-            public string buyer1 { get; set; }
-            public string buyer2 { get; set;}
-            
+            public string 受注コード { get; set; }
+            public string 購入者名1 { get; set; }
+
+            public string 購入者名2 { get; set; }
+
         }
     }
 }
