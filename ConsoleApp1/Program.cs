@@ -25,6 +25,7 @@ namespace test
                 //ヘッダー取得
                 csv.Read();
                 csv.ReadHeader();
+                //ヘッダー名出力
                 //Console.WriteLine(string.Join(",", csv.HeaderRecord!));
                 csv.GetRecords<Data>().Where(A => A.購入者名1.EndsWith("A")).ToList().ForEach(data => Console.WriteLine(data.購入者名1));
                 // 内容取得
