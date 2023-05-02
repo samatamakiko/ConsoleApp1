@@ -19,21 +19,21 @@ namespace test
             };
             System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
             using (var reader = new StreamReader(@"C:\Users\makik\Downloads\test.csv", Encoding.GetEncoding("Shift-JIS")))
-            using (var csv = new CsvReader(reader, config))
+            using (var csv = new CsvReader(reader,config))
             {
                
                 //ヘッダー取得
                 csv.Read();
                 csv.ReadHeader();
                 //ヘッダー名出力
-                //Console.WriteLine(string.Join(",", csv.HeaderRecord!));
-                csv.GetRecords<Data>().Where(A => A.購入者名1.EndsWith("A")).ToList().ForEach(data => Console.WriteLine(data.購入者名1));
+                Console.WriteLine(string.Join(",", csv.HeaderRecord!));
+                //csv.GetRecords<Data>().Where(A => A.購入者名1.EndsWith("A")).ToList().ForEach(data => Console.WriteLine(data.購入者名1));
                 // 内容取得
-               /* foreach (var record in csv.GetRecords<Data>())
+                foreach (var record in csv.GetRecords<Data>())
                 {
                     Console.WriteLine($"{record.受注コード},{record.購入者名1},{record.購入者名2}");
-                  
-                }*/
+
+                }
             }
 
         }
@@ -45,4 +45,5 @@ namespace test
 
         }
     }
-}
+}//Linqとは→foreachのパワーアップ版
+//SQLとは違うもの
