@@ -21,7 +21,7 @@ namespace test
         
         static void Main(string[] args)
         {
-            //リスト格納
+            //リスト定義（定義だけで）
             var aaa = new List<Csv1>();
             var bbb = new List<Csv2>();
             //１つ目CSV出力
@@ -73,12 +73,12 @@ namespace test
             var query = from p in aaa
                         join q in bbb
                         on p.部署番号 equals q.部署番号
-                        select new { num = p.社員番号, jobID = p.部署番号, name = p.名前, joobname = q.部署名 };
+                        select new { 社員番号 = p.社員番号, jobID = p.部署番号, name = p.名前, joobname = q.部署名 };
 
             // クエリの実行と出力
             foreach (var s in query)
             {
-                Console.WriteLine($"{s.num},{s.jobID},{s.name},{s.joobname},");
+                Console.WriteLine($"{s.社員番号},{s.jobID},{s.name},{s.joobname},");
             }
 
 
