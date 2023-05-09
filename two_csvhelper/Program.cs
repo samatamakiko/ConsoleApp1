@@ -21,7 +21,7 @@ namespace test
         
         static void Main(string[] args)
         {
-            //リスト定義（定義だけで）
+            //リスト定義（定義だけで格納はまだ）
             var aaa = new List<Csv1>();
             var bbb = new List<Csv2>();
             //１つ目CSV出力
@@ -54,13 +54,13 @@ namespace test
                 HasHeaderRecord = true,
             };
             System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
-            using (var reader2 = new StreamReader(@"C:\Users\makik\Downloads\testcsv.csv", Encoding.GetEncoding("Shift-JIS")))
+            using (var reader2 = new StreamReader(@"C:\Users\makik\Downloads\testcsv.csv1.csv", Encoding.GetEncoding("Shift-JIS")))
             using (var csv2 = new CsvReader(reader2, config2))
             {
                 csv2.Read();
                 csv2.ReadHeader();
                 //ヘッダー名出力
-                //Console.WriteLine(string.Join(",", csv2.HeaderRecord!));
+                Console.WriteLine(string.Join(",", csv2.HeaderRecord!));
 
                 foreach (var record2 in csv2.GetRecords<Csv2>())
                 {
@@ -73,15 +73,16 @@ namespace test
             var query = from p in aaa
                         join q in bbb
                         on p.部署番号 equals q.部署番号
-                        select new { 社員番号 = p.社員番号, jobID = p.部署番号, name = p.名前, joobname = q.部署名 };
+                        select new { num = p.社員番号, jobID = p.部署番号, name = p.名前, joobname = q.部署名 };
 
             // クエリの実行と出力
             foreach (var s in query)
             {
-                Console.WriteLine($"{s.社員番号},{s.jobID},{s.name},{s.joobname},");
+                Console.WriteLine($"{s.num},{s.jobID},{s.name},{s.joobname},");
+               // Console.ReadLine();
             }
 
-
+           
 
 
 
